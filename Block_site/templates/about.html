@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-head">
+    <h1>About Manga Block</h1>
+    <p>
+        Manga Block is built for readers who want clean design, quick navigation, and curated titles.
+        We focus on smooth reading flow and useful discovery tools.
+    </p>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <h3>{{ stats.users }}</h3>
+        <p>Active Users</p>
+    </article>
+    <article class="stat-card">
+        <h3>{{ stats.manga_titles }}</h3>
+        <p>Manga Titles</p>
+    </article>
+    <article class="stat-card">
+        <h3>{{ stats.daily_reads }}</h3>
+        <p>Daily Reads</p>
+    </article>
+</section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-head">
+    <h1>Manga Genres</h1>
+    <p>Choose your mood and jump into the right story world.</p>
+</section>
+
+<section class="card-grid">
+    {% for genre in genre_data %}
+    <article class="card">
+        <h3>{{ genre.name }} <span class="genre-count">{{ genre.count }}</span></h3>
+        <p>{{ genre.description }}</p>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

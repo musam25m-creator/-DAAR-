@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAAR Hisob</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-shape bg-1"></div>
+  <div class="bg-shape bg-2"></div>
+  <div id="cursorGlow" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="assets/logo-daar.svg" alt="DAAR">
+      <h1 data-i18n="appName">DAAR Hisob</h1>
+      <p data-i18n="appTagline">Santexnika va qurilish materiallari uchun hisob-kitob</p>
+    </div>
+    <div class="controls">
+      <select id="langSelect" aria-label="Language">
+        <option value="uz">UZ</option>
+        <option value="ru">RU</option>
+        <option value="en">EN</option>
+      </select>
+      <button id="themeToggle" class="ghost-btn" type="button" data-i18n="darkMode">Tun rejimi</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="welcome-card">
+      <p id="welcomeText">Xush kelibsiz!</p>
+      <div class="page-switch">
+        <button class="page-btn active" data-page="calc" data-i18n="calcPageBtn">1-sahifa: Hisoblash</button>
+        <button class="page-btn" data-page="history" data-i18n="historyPageBtn">2-sahifa: Oldingi hisoblar</button>
+      </div>
+    </div>
+
+    <section id="calcPage" class="page-panel active">
+      <div class="panel-head">
+        <h2 data-i18n="calculatorTitle">1-sahifa: Metr kiriting va jadval oling</h2>
+        <p data-i18n="calculatorSubtitle">Material tanlang, necha metr kerakligini kiriting, so'ng yakuniy jadval chiqadi.</p>
+      </div>
+
+      <div class="panel-head inner-head">
+        <h3 data-i18n="catalogTitle">Santexnika va qurilish materiallari (DAAR logo bilan)</h3>
+        <p data-i18n="catalogSubtitle">Har bir material uchun 1 metr (yoki dona) narxini shu yerning o'zida o'zgartira olasiz.</p>
+      </div>
+      <div id="catalogGrid" class="catalog-grid"></div>
+
+      <div class="panel-head inner-head">
+        <h3 data-i18n="summaryTitle">Yakuniy jadval</h3>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="tableNo">#</th>
+              <th data-i18n="tableMaterial">Material</th>
+              <th data-i18n="tableMeters">Metr</th>
+              <th data-i18n="tableUnitPrice">1m narxi</th>
+              <th data-i18n="tableTotal">Jami narx</th>
+              <th data-i18n="action">Amal</th>
+            </tr>
+          </thead>
+          <tbody id="summaryBody"></tbody>
+        </table>
+      </div>
+
+      <div class="summary">
+        <strong data-i18n="grandTotal">Umumiy narx:</strong>
+        <span id="grandTotalValue">0 so'm</span>
+      </div>
+
+      <div class="action-row">
+        <button id="saveEstimateBtn" class="secondary-btn" type="button" data-i18n="saveEstimate">Hisobni saqlash</button>
+        <button id="printBtn" class="ghost-btn" type="button" data-i18n="print">Chop etish</button>
+        <button id="shareBtn" class="ghost-btn" type="button" data-i18n="share">Ulashish (rasm)</button>
+        <button id="clearAllBtn" class="danger-btn" type="button" data-i18n="clearAll">Hammasini tozalash</button>
+      </div>
+    </section>
+
+    <section id="historyPage" class="page-panel">
+      <div class="panel-head">
+        <h2 data-i18n="savedTitle">2-sahifa: Oldingi hisob-kitoblar</h2>
+        <p data-i18n="savedSubtitle">Avvalgi hisoblarni shu yerda ko'rasiz va qayta ochasiz.</p>
+      </div>
+      <div class="action-row">
+        <button id="refreshSavedBtn" class="ghost-btn" type="button" data-i18n="refreshSaved">Saqlanganlarni yangilash</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th data-i18n="customer">Mijoz</th>
+              <th data-i18n="phone">Telefon</th>
+              <th data-i18n="tableTotal">Jami narx</th>
+              <th data-i18n="createdAt">Vaqti</th>
+              <th data-i18n="action">Amal</th>
+            </tr>
+          </thead>
+          <tbody id="savedBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="registerOverlay" class="overlay">
+    <div class="register-card">
+      <h2 data-i18n="registerTitle">Ro'yxatdan o'tish</h2>
+      <p data-i18n="registerSubtitle">Davom etish uchun ma'lumot kiriting.</p>
+      <form id="registerForm">
+        <input id="nameInput" type="text" required placeholder="Ism">
+        <input id="phoneInput" type="tel" required placeholder="+998 90 123 45 67">
+        <button type="submit" data-i18n="registerBtn">Kirish</button>
+      </form>
+    </div>
+  </div>
+  <div id="toastStack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

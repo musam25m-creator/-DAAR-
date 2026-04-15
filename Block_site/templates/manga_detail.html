@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-head">
+    <p class="eyebrow">{{ manga.status }}</p>
+    <h1>{{ manga.title }}</h1>
+    <p>{{ manga.summary }}</p>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <h3>{{ manga.rating }}/10</h3>
+        <p>Community Rating</p>
+    </article>
+    <article class="stat-card">
+        <h3>{{ manga.chapters }}</h3>
+        <p>Total Chapters</p>
+    </article>
+    <article class="stat-card">
+        <h3>{{ manga.genre }}</h3>
+        <p>Main Genres</p>
+    </article>
+</section>
+
+<section class="detail-grid">
+    <article class="card">
+        <h3>Asosiy Ma'lumotlar</h3>
+        <p><strong>Muallif:</strong> {{ details.author }}</p>
+        <p><strong>Nashriyot:</strong> {{ details.publisher }}</p>
+        <p><strong>Toifa:</strong> {{ details.demographic }}</p>
+        <p><strong>Boshlangan:</strong> {{ details.started }}</p>
+        <p><strong>Reliz rejasi:</strong> {{ details.release_plan }}</p>
+    </article>
+
+    <article class="card">
+        <h3>Qahramonlar</h3>
+        <ul class="clean-list">
+            {% for character in details.main_characters %}
+            <li>{{ character }}</li>
+            {% endfor %}
+        </ul>
+    </article>
+
+    <article class="card">
+        <h3>Yirik Arc/Boblar</h3>
+        <ul class="clean-list">
+            {% for arc in details.story_arcs %}
+            <li>{{ arc }}</li>
+            {% endfor %}
+        </ul>
+    </article>
+
+    <article class="card">
+        <h3>Qo'shimcha</h3>
+        <p><strong>Alternative nom:</strong> {{ details.alt_titles | join(', ') }}</p>
+        <p><strong>Izoh:</strong> {{ details.reader_note }}</p>
+        <p><strong>Oxirgi update:</strong> {{ manga.updated_at }}</p>
+    </article>
+</section>
+
+{% if related_titles %}
+<section>
+    <h2 class="section-title">O'xshash Manga</h2>
+    <div class="card-grid">
+        {% for item in related_titles %}
+        <article class="card">
+            <h3>{{ item.title }}</h3>
+            <p><strong>Janr:</strong> {{ item.genre }}</p>
+            <p><strong>Reyting:</strong> {{ item.rating }}/10</p>
+            <a class="text-link" href="{{ url_for('manga_detail', slug=item.slug) }}">Ko'rish</a>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="detail-actions">
+    <a href="{{ url_for('catalog') }}" class="btn-main">Back to Catalog</a>
+</section>
+{% endblock %}

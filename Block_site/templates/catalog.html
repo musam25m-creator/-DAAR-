@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-head">
+    <h1>Full Manga Catalog</h1>
+    <p>Browse selected popular titles with chapter count and status.</p>
+</section>
+
+<section class="filter-panel">
+    <form method="get" class="filter-form">
+        <input type="text" name="q" value="{{ current_query }}" placeholder="Search by title or genre">
+        <select name="status">
+            <option value="all" {{ "selected" if current_status == "all" else "" }}>All status</option>
+            <option value="ongoing" {{ "selected" if current_status == "ongoing" else "" }}>Ongoing</option>
+            <option value="completed" {{ "selected" if current_status == "completed" else "" }}>Completed</option>
+        </select>
+        <select name="sort">
+            <option value="title" {{ "selected" if current_sort == "title" else "" }}>Sort: Title</option>
+            <option value="rating" {{ "selected" if current_sort == "rating" else "" }}>Sort: Rating</option>
+            <option value="chapters" {{ "selected" if current_sort == "chapters" else "" }}>Sort: Chapters</option>
+        </select>
+        <button type="submit" class="btn-main">Apply</button>
+    </form>
+</section>
+
+<section class="card-grid">
+    {% if manga_list %}
+    {% for manga in manga_list %}
+    <article class="card">
+        <h3>{{ manga.title }}</h3>
+        <p><strong>Genre:</strong> {{ manga.genre }}</p>
+        <p><strong>Chapters:</strong> {{ manga.chapters }}</p>
+        <p><strong>Status:</strong> {{ manga.status }}</p>
+        <p><strong>Rating:</strong> {{ manga.rating }}/10</p>
+        <a class="text-link" href="{{ url_for('manga_detail', slug=manga.slug) }}">Read summary</a>
+    </article>
+    {% endfor %}
+    {% else %}
+    <article class="card">
+        <h3>No results found</h3>
+        <p>Try another title, genre keyword, or reset your filters.</p>
+    </article>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-head">
+    <h1>Weekly Trending</h1>
+    <p>Most viewed manga this week across the platform.</p>
+</section>
+
+<section class="card-grid">
+    {% for title in hot_titles %}
+    <article class="card rank-card">
+        <span class="rank">#{{ title.rank }}</span>
+        <h3>{{ title.name }}</h3>
+        <p><strong>Weekly Views:</strong> {{ title.weekly_views }}</p>
+        <a class="text-link" href="{{ url_for('manga_detail', slug=title.slug) }}">Open title</a>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

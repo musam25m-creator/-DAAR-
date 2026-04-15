@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">Top Reading Platform</p>
+    <h1>Your Manga Universe Starts Here</h1>
+    <p class="hero-text">
+        Discover the best manga chapters, follow fresh releases, and build your own reading list.
+        Manga Block gives you speed, quality, and a premium reading vibe.
+    </p>
+    <div class="hero-actions">
+        <a href="{{ url_for('catalog') }}" class="btn-main">Explore Catalog</a>
+        <a href="{{ url_for('random_pick') }}" class="btn-main btn-soft">Random Pick</a>
+    </div>
+</section>
+
+<section>
+    <h2 class="section-title">Featured Today</h2>
+    <div class="card-grid">
+        {% for item in featured %}
+        <article class="card">
+            <h3>{{ item.title }}</h3>
+            <p><strong>Genre:</strong> {{ item.genre }}</p>
+            <p><strong>Rating:</strong> {{ item.rating }}/10</p>
+            <a class="text-link" href="{{ url_for('manga_detail', slug=item.slug) }}">View details</a>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <h2 class="section-title">Latest Chapter Updates</h2>
+    <div class="card-grid">
+        {% for item in latest_updates %}
+        <article class="card">
+            <h3>{{ item.title }}</h3>
+            <p><strong>Chapter:</strong> {{ item.latest_chapter }}</p>
+            <p><strong>Updated:</strong> {{ item.updated_at }}</p>
+            <a class="text-link" href="{{ url_for('manga_detail', slug=item.slug) }}">Continue reading</a>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
