@@ -1,8 +1,0 @@
-[project]
-root = "hisob_fayl"
-
-[commands]
-start = "python3 site.py"
-
-[generators]
-python = true

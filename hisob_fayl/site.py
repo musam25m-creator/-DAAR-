@@ -12,7 +12,8 @@ import webbrowser
 
 
 HOST = os.getenv("APP_HOST", "0.0.0.0")
-PORT = int(os.getenv("APP_PORT", "8000"))
+# Railway/Railpack injects PORT; APP_PORT remains as local fallback.
+PORT = int(os.getenv("PORT", os.getenv("APP_PORT", "8000")))
 PROJECT_DIR = Path(__file__).resolve().parent
 DB_PATH = PROJECT_DIR / "santech.db"
 
